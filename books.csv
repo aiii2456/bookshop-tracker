@@ -1,0 +1,5 @@
+Title,Author,Price,Copies_Sold,In_Stock
+Superposition,David Walton,18.99,12,True
+The Quantum Thief,Hannu Rajaniemi,17.50,8,True
+Thinking in Systems,Donella Meadows,22.00,15,False
+Designing Data-Intensive Applications,Martin Kleppmann,45.00,6,True

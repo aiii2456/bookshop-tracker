@@ -1,28 +1,25 @@
-# Bookshop.org Affiliate & Inventory Tracker
+import csv
 
-# 1. STRING (Text data)
-book_title = "Superposition"
-author = "David Walton"
 shop_name = "My Curated Bookshop"
-
-# 2. INTEGER (Whole numbers)
-pages = 384
-copies_sold = 12
-
-# 3. FLOAT (Decimal numbers)
-book_price = 18.99
 commission_rate = 0.10
+total_earned = 0.0
 
-# 4. BOOLEAN (True/False switches)
-is_in_stock = True
+print(f"--- {shop_name} Inventory & Earnings Report ---\n")
 
-# Calculate total earnings
-total_earned = copies_sold * book_price * commission_rate
+with open("books.csv", mode="r", newline="") as file:
+    reader = csv.DictReader(file)
+    for row in reader:
+        title = row["Title"]                  # String
+        author = row["Author"]                # String
+        price = float(row["Price"])           # Float
+        sold = int(row["Copies_Sold"])        # Integer
+        in_stock = row["In_Stock"] == "True"  # Boolean
 
-if is_in_stock:
-    print("Welcome to", shop_name)
-    print("Book:", book_title, "by", author)
-    print("Pages:", pages)
-    print("Total Affiliate Earnings: $", round(total_earned, 2))
-else:
-    print("Sorry, this book is currently out of stock.")
+        book_earned = price * sold * commission_rate
+        total_earned += book_earned
+        status = "In Stock" if in_stock else "Out of Stock"
+
+        print(f"{title} by {author}")
+        print(f"  Status: {status} | Sold: {sold} | Commission: ${book_earned:.2f}\n")
+
+print(f"Total Affiliate Earnings: ${total_earned:.2f}")
